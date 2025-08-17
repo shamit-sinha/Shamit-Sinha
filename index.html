@@ -23,11 +23,11 @@
             font-family: 'Press Start 2P', monospace;
             color: #d1d5db;
             animation: fadeIn 2s ease-in-out;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
         }
         
-        /* Video background styling */
+        /* Video background styling - now fully responsive */
         #bg-video {
             position: fixed;
             top: 50%;
@@ -93,19 +93,17 @@
             justify-content: space-between;
         }
 
-        /* Placeholder for the user's picture */
+        /* Responsive profile picture container */
         .profile-picture-container {
-            width: 150px;
-            height: 150px;
+            width: clamp(120px, 15vw, 180px);
+            height: clamp(120px, 15vw, 180px);
             border-radius: 50%;
             overflow: hidden;
             background-color: var(--color-neon-yellow);
             border: 2px solid var(--color-neon-yellow);
             box-shadow: 0 0 15px var(--color-neon-yellow);
-            margin-right: 2rem;
+            margin: 0 auto;
             flex-shrink: 0;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .profile-picture {
@@ -135,6 +133,8 @@
             padding: 2rem;
             text-align: center;
             position: relative;
+            width: 90%;
+            max-width: 500px;
         }
 
         /* Close button styling */
@@ -160,89 +160,63 @@
             color: #ff4444;
         }
 
-        /* Updated content box styling */
+        /* Responsive content box styling */
         .content-box {
             background: rgba(0, 0, 0, 0.75);
             border: 2px solid var(--color-lavender);
             animation: border-pulse 2s infinite ease-in-out;
-            padding: 2rem;
+            padding: clamp(1.5rem, 3vw, 3rem);
             border-radius: 8px;
-            flex: 0 0 auto;
+            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            width: 750px;
-            min-height: 29px;
+            width: 100%;
+            max-width: 800px;
+            min-height: 400px;
         }
 
         .content-box-text {
             text-align: left;
+            width: 100%;
         }
 
-        .content-box-right .content-box-text {
-            text-align: left;
-        }
-
-        /* Updated main layout to push boxes to sides and center them better */
+        /* Responsive main layout container */
         .main-layout-container {
             position: relative;
             width: 100%;
-            min-height: 80vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            padding: 2rem;
+            box-sizing: border-box;
         }
 
+        /* Responsive boxes container */
         .boxes-container {
             display: flex;
             justify-content: center;
             align-items: flex-start;
             width: 100%;
-            padding: 0 2rem;
             flex-grow: 1;
-            margin-top: 5rem;
-            margin-bottom: 1rem;
-            gap: 4rem;
+            margin-top: clamp(3rem, 8vh, 6rem);
+            margin-bottom: 2rem;
+            gap: clamp(2rem, 5vw, 8rem);
+            flex-wrap: wrap;
         }
 
-        /* Better centering for larger screens */
-        @media (min-width: 1200px) {
-            .boxes-container {
-                padding: 0 4rem;
-                gap: 6rem;
-            }
-        }
-
-        @media (min-width: 768px) {
-            .boxes-container {
-                gap: 5rem;
-            }
-        }
-
-        /* Mobile responsive stacking */
-        @media (max-width: 767px) {
-            .boxes-container {
-                flex-direction: column;
-                gap: 3rem;
-                align-items: center;
-            }
-            
-            .content-box {
-                width: 100%;
-                max-width: 400px;
-            }
-        }
-
-        /* Adjusted header positioning - moved down by additional 10px */
+        /* Responsive header */
         .main-header {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
             text-align: center;
             z-index: 10;
+            margin-bottom: 2rem;
+        }
+
+        .main-header h1 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            line-height: 1.2;
         }
 
         /* Underline styling for title */
@@ -253,9 +227,9 @@
             text-decoration-thickness: 3px;
         }
 
-        /* Adjusted contact section and footer positioning - moved down by additional 10px */
+        /* Responsive bottom section */
         .bottom-section {
-            margin-top: 2.5rem;
+            margin-top: 2rem;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -264,24 +238,121 @@
             padding-bottom: 2rem;
         }
         
-        /* Project and social button styling */
+        /* Responsive project and social button styling */
         .project-btn, .social-btn {
             font-family: 'Press Start 2P', monospace;
             border-radius: 4px;
             text-transform: uppercase;
-            font-size: 10px;
+            font-size: clamp(8px, 1.2vw, 12px);
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
         }
         
         .project-item {
             padding: 0.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
         
         .social-links a {
             font-family: 'Press Start 2P', monospace;
         }
+
+        /* Responsive text sizing */
+        .content-box h2 {
+            font-size: clamp(0.875rem, 1.5vw, 1.25rem);
+        }
+
+        .content-box p {
+            font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+            line-height: 1.6;
+        }
+
+        .project-category h3 {
+            font-size: clamp(0.75rem, 1.3vw, 1rem);
+        }
+
+        /* Breakpoints for different screen sizes */
+        @media (max-width: 1400px) {
+            .boxes-container {
+                gap: clamp(2rem, 4vw, 6rem);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .boxes-container {
+                gap: clamp(1.5rem, 3vw, 4rem);
+            }
+            
+            .content-box {
+                max-width: 600px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .boxes-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 3rem;
+            }
+            
+            .content-box {
+                max-width: 700px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-layout-container {
+                padding: 1rem;
+            }
+            
+            .content-box {
+                padding: 1.5rem;
+                max-width: 100%;
+            }
+            
+            .project-item {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            .boxes-container {
+                gap: clamp(4rem, 8vw, 12rem);
+            }
+            
+            .content-box {
+                max-width: 900px;
+            }
+        }
+
+        @media (min-width: 2000px) {
+            .main-layout-container {
+                padding: 4rem;
+            }
+            
+            .content-box {
+                max-width: 1000px;
+                padding: 4rem;
+            }
+        }
+
+        /* Ultra-wide screen support */
+        @media (min-width: 2560px) {
+            .boxes-container {
+                gap: clamp(8rem, 12vw, 16rem);
+            }
+            
+            .content-box {
+                max-width: 1200px;
+                padding: 5rem;
+            }
+        }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center min-h-screen p-4">
+<body class="flex flex-col items-center justify-center min-h-screen">
 
     <!-- The background video element -->
     <video autoplay loop muted playsinline id="bg-video">
@@ -295,33 +366,36 @@
             <button id="closeModal" class="close-btn">&times;</button>
             <h2 class="text-xl md:text-2xl font-bold text-red-500 mb-4">!! CONNECTION ALERT !!</h2>
             <p class="mb-6">To make a successful connection, email me at <br><span class="text-lavender neon-glow">theunfunnysinha@gmail.com</span></p>
-            <a href="gmail.com" id="emailLink" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
+            <a href="mailto:theunfunnysinha@gmail.com" id="emailLink" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
                 > Connect
             </a>
         </div>
+
     </div>
 
     <!-- The main layout container -->
-    <div class="max-w-7xl w-full main-layout-container">
-        <!-- Header positioned above the boxes -->
+    <div class="max-w-full w-full main-layout-container">
+        <!-- Header -->
         <header class="main-header">
-            <h1 class="text-3xl md:text-4xl font-bold mb-2 neon-glow text-center underlined-title" style="font-size: 48px;">SHAMIT SINHA</h1>
+            <h1 class="font-bold mb-2 neon-glow text-center underlined-title">SHAMIT SINHA</h1>
         </header>
 
         <!-- Container for the two boxes centered with proper spacing -->
         <div class="boxes-container">
             <!-- Left Box: About.txt and profile picture -->
             <section class="content-box">
-                <div class="flex flex-col items-center space-y-4">
+                <div class="flex flex-col items-center space-y-4 w-full">
                     <div class="profile-picture-container">
                         <img src="profile.png" alt="Your Profile Picture" class="profile-picture">
                     </div>
                     <div class="content-box-text">
-                        <h2 class="text-lg md:text-xl font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
-                        <p class="mt-2 leading-relaxed text-sm">
+                        <h2 class="font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
+                        <p class="mt-2 leading-relaxed">
                             Hey there! I'm a content creator and storyteller currently studying at RVCE. Over the past 2-3 years, I've been diving deep into video production—everything from coming up with ideas and writing scripts to getting behind the camera and bringing it all together in the editing room.
                             <br><br>
-                            What started as a passion project has grown into something amazing—my YouTube channel now has over 25K subscribers. I love sharing stories that connect with people, and I've also had the chance to work on some exciting short films at Studio Zero. Recently, I've been creating content for IITJ through Binge Labs, for their BSC degree in AI & DS
+                            What started as a passion project has grown into something amazing—my YouTube channel now has over 25K subscribers. I love sharing stories that connect with people,
+<br><br>
+ I've also had the chance to work on some exciting short films at Studio Zero. Recently, I've been creating content for IITJ through Binge Labs, for their BSC degree in AI & DS
                         </p>
                     </div>
                 </div>
@@ -330,27 +404,27 @@
             <!-- Right Box: Projects.exe -->
             <section class="content-box content-box-right">
                 <div class="content-box-text">
-                    <h2 class="text-lg md:text-xl font-semibold mb-2 neon-glow">/PROJECTS.EXE</h2>
-                    <p class="mt-2 leading-relaxed text-sm mb-4">
-                        I use IPhone to shoot with the exact lighting and DaVinci Resolve to edit videos with various editing effects, bringing stories to life through post-production magic.
+                    <h2 class="font-semibold mb-2 neon-glow">/PROJECTS.EXE</h2>
+                    <p class="mt-2 leading-relaxed mb-4">
+                        I use iPhone to shoot and DaVinci Resolve to edit videos with various editing effects, bringing stories to life through post-production magic.
                     </p>
                     
                     <!-- Projects Section -->
                     <div class="projects-grid space-y-4">
                         <!-- Documentary -->
                         <div class="project-category">
-                            <h3 class="text-sm font-bold mb-2 text-neon-yellow">DOCUMENTARY</h3>
+                            <h3 class="font-bold mb-2 text-neon-yellow">DOCUMENTARY</h3>
                             <div class="project-items space-y-2 ml-4">
                                 <div class="project-item">
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('iitjee-experience')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('iitjee-experience')">
                                         > IITJEE:An Exp
                                     </button>
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('hows-college')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('hows-college')">
                                         > How's College
                                     </button>
                                 </div>
                                 <div class="project-item">
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('invited-iitk')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('invited-iitk')">
                                         > Invited To IIT K
                                     </button>
                                 </div>
@@ -359,41 +433,39 @@
                         
                         <!-- Short Film -->
                         <div class="project-category">
-                            <h3 class="text-sm font-bold mb-2 text-neon-yellow">SHORT FILM</h3>
+                            <h3 class="font-bold mb-2 text-neon-yellow">SHORT FILM</h3>
                             <div class="project-items space-y-2 ml-4">
                                 <div class="project-item">
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('all')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('all')">
                                         > All Izz Well (Music Video)
                                     </button>
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('alffaaz')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('alffaaz')">
                                         > Alffaaz
                                     </button>
                                 </div>
                                 <div class="project-item">
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('between-light-life')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('between-light-life')">
                                         > Between Light and Life
                                     </button>
-                                    
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('the-delivery')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('the-delivery')">
                                         > The Delivery
                                     </button>
                                 </div>
-                               
                             </div>
                         </div>
                         
                         <!-- Work For IIT J -->
                         <div class="project-category">
-                            <h3 class="text-sm font-bold mb-2 text-neon-yellow">WORK FOR IIT J</h3>
+                            <h3 class="font-bold mb-2 text-neon-yellow">WORK FOR IIT J</h3>
                             <div class="project-items space-y-2 ml-4">
                                 <div class="project-item">
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel1')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel1')">
                                         > Reel 1
                                     </button>
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel2')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel2')">
                                         > Reel 2
                                     </button>
-                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel3')">
+                                    <button class="project-btn border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel3')">
                                         > Reel 3
                                     </button>
                                 </div>
@@ -404,15 +476,15 @@
                     <!-- Social Links -->
                     <div class="social-links mt-4 pt-3 border-t border-gray-600">
                         <p class="text-xs mb-2">MY SOCIALS:</p>
-                        <div class="flex space-x-3">
-                            <a href="https://www.instagram.com/unfunnysinhaa/" target="_blank" class="social-btn text-xs py-1 px-2 border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
+                        <div class="flex flex-wrap gap-2">
+                            <a href="https://www.instagram.com/unfunnysinhaa/" target="_blank" class="social-btn border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
                                 Instagram
                             </a>
-                            <a href="https://www.youtube.com/@unfunnysinhaa" target="_blank" class="social-btn text-xs py-1 px-2 border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
+                            <a href="https://www.youtube.com/@unfunnysinhaa" target="_blank" class="social-btn border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
                                 YouTube
                             </a>
-                            <a href="https://www.linkedin.com/in/shamit-sinha-168730319/" target="_blank" class="social-btn text-xs py-1 px-2 border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
-                                Lniked IN
+                            <a href="https://www.linkedin.com/in/shamit-sinha-168730319/" target="_blank" class="social-btn border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
+                                LinkedIn
                             </a>
                         </div>
                     </div>
@@ -420,7 +492,7 @@
             </section>
         </div>
 
-        <!-- Bottom section with Contact and Footer together - positioned lower -->
+        <!-- Bottom section with Contact and Footer together -->
         <div class="bottom-section">
             <a href="#" id="contactButton" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
                 > Contact Me
@@ -486,9 +558,6 @@
     </script>
 </body>
 </html>
-
-
-
 
 
 
