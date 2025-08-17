@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-s1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -23,9 +23,8 @@
             font-family: 'Press Start 2P', monospace;
             color: #d1d5db;
             animation: fadeIn 2s ease-in-out;
-            /* Hide body overflow to prevent scrollbars */
             overflow: hidden;
-            position: relative; /* Required for the video to be positioned absolutely */
+            position: relative;
         }
         
         /* Video background styling */
@@ -39,7 +38,7 @@
             height: auto;
             transform: translateX(-50%) translateY(-50%);
             z-index: -1;
-            filter: brightness(25%) grayscale(50%) blur(2px); /* To make the video look subtle and not distract from the text */
+            filter: brightness(25%) grayscale(50%) blur(2px);
         }
 
         /* Glitch animation for text */
@@ -86,22 +85,12 @@
         }
         
         .crt-monitor {
-            background: rgba(0, 0, 0, 0.75); /* Semi-transparent background for the content card */
+            background: rgba(0, 0, 0, 0.75);
             border: 2px solid var(--color-lavender);
             animation: border-pulse 2s infinite ease-in-out;
-            /* Ensure the content container has a defined space for the canvas */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-
-        /* Flex container for the aligned sections */
-        .flex-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-direction: column;
-            text-align: left;
         }
 
         /* Placeholder for the user's picture */
@@ -110,23 +99,19 @@
             height: 150px;
             border-radius: 50%;
             overflow: hidden;
+            background-color: var(--color-neon-yellow);
             border: 2px solid var(--color-neon-yellow);
             box-shadow: 0 0 15px var(--color-neon-yellow);
             margin-right: 2rem;
             flex-shrink: 0;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .profile-picture {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Removed the filter to show the original colors */
-        }
-
-        @media (min-width: 768px) {
-            .flex-container {
-                flex-direction: row;
-            }
         }
 
         /* Modal styling for the error box */
@@ -145,28 +130,63 @@
 
         .error-box {
             background-color: #1a1a1a;
-            border: 2px solid #ff00ff; /* Magenta border to make it pop */
+            border: 2px solid #ff00ff;
             box-shadow: 0 0 20px #ff00ff;
             padding: 2rem;
             text-align: center;
         }
 
-        .about-section-container {
-            border: 2px solid #a879d7;
-            padding: 1rem;
+        /* Two-column layout for the main content boxes */
+        .main-content-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 5rem;
+        }
+
+        @media (min-width: 768px) {
+            .main-content-layout {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20rem; /* Increased the gap for more space in the middle */
+                padding: 0 2rem;
+                align-items: stretch;
+            }
+        }
+
+        /* New styles for the two separate content boxes */
+        .content-box {
+            background: rgba(0, 0, 0, 0.75);
+            border: 2px solid var(--color-lavender);
+            animation: border-pulse 2s infinite ease-in-out;
+            padding: 2rem;
             border-radius: 8px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .content-box-text {
+            text-align: left;
+        }
+
+        .content-box-right .content-box-text {
+            text-align: right;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
 
     <!-- The background video element -->
     <video autoplay loop muted playsinline id="bg-video">
-        <!-- The src attribute points to your video file on GitHub -->
         <source src="video.mov" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
+    <!-- The error modal, hidden by default -->
     <div id="contactModal" class="error-modal hidden">
         <div class="error-box">
             <h2 class="text-xl md:text-2xl font-bold text-red-500 mb-4">!! CONNECTION ALERT !!</h2>
@@ -180,20 +200,22 @@
         </div>
     </div>
 
-    <div class="crt-monitor max-w-2xl w-full rounded-lg p-8 md:p-12 text-center text-sm transform transition duration-500 hover:scale-105">
+    <!-- The main layout container with the two content boxes -->
+    <div class="max-w-6xl w-full text-center p-4">
         <header class="mb-8">
             <h1 class="text-3xl md:text-4xl font-bold mb-2 neon-glow text-center">MY PORTFOLIO</h1>
         </header>
-        
-        <main class="space-y-6 text-white text-left">
-            <section class="about-section-container">
-                <div class="flex-container">
+
+        <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch space-y-8 md:space-y-0 md:space-x-12">
+            <!-- Left Box: About.txt and profile picture -->
+            <section class="content-box">
+                <div class="flex flex-col items-center space-y-4">
                     <div class="profile-picture-container">
                         <img src="profile.png" alt="Your Profile Picture" class="profile-picture">
                     </div>
-                    <div>
-                        <h2 class="text-xl md:text-2xl font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
-                        <p class="mt-2 leading-relaxed">
+                    <div class="content-box-text">
+                        <h2 class="text-lg md:text-xl font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
+                        <p class="mt-2 leading-relaxed text-sm">
                             Hello! I'm a passionate creator, and this is my digital space. Here you'll find a collection of my
                             projects, from video editing and graphic design to web development. I am always exploring
                             new ideas and love to bring concepts to life.
@@ -202,122 +224,32 @@
                 </div>
             </section>
             
-            <section>
-                <h2 class="text-xl md:text-2xl font-semibold mb-2 neon-glow">/PROJECTS.EXE</h2>
-                <p class="mt-2 leading-relaxed">
-                    <span class="text-lavender">Loading...</span>
-                    This space will showcase my projects, inspired by the aesthetics of a
-                    bygone digital age. From pixel art to 3D rendering.
-                </p>
+            <!-- Right Box: Projects.exe -->
+            <section class="content-box">
+                <div class="content-box-text">
+                    <h2 class="text-lg md:text-xl font-semibold mb-2 neon-glow">/PROJECTS.EXE</h2>
+                    <p class="mt-2 leading-relaxed text-sm">
+                        <span class="text-lavender">Loading...</span>
+                        This space will showcase my projects, inspired by the aesthetics of a
+                        bygone digital age. From pixel art to 3D rendering.
+                    </p>
+                </div>
             </section>
+        </div>
 
-            <section class="text-center">
-                <a href="#" id="contactButton" class="pulsing-button mt-4 inline-block font-bold py-3 px-8 rounded-full">
-                    > Contact Me
-                </a>
-            </section>
-        </main>
+        <!-- The Contact Me button is now centered at the bottom of the page -->
+        <section class="text-center mt-8">
+            <a href="#" id="contactButton" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
+                > Contact Me
+            </a>
+        </section>
         
-        <canvas id="cartoonCanvas" width="400" height="200" class="mt-8 max-w-full h-auto"></canvas>
-
         <footer class="mt-8 text-gray-500 text-xs text-center">
             > C://USER/MY_WEBSITE
         </footer>
     </div>
-
+    
     <script>
-        const canvas = document.getElementById('cartoonCanvas');
-        const ctx = canvas.getContext('2d');
-        let frame = 0;
-        let headNod = 0;
-
-        function drawCharacter(x, y, frame) {
-            ctx.strokeStyle = '#d1d5db';
-            ctx.fillStyle = '#111';
-            ctx.lineWidth = 3;
-            ctx.lineCap = 'round';
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // A simple desk for the character to sit at
-            const deskY = y + 20;
-            ctx.beginPath();
-            ctx.moveTo(x - 60, deskY);
-            ctx.lineTo(x + 60, deskY);
-            ctx.stroke();
-            
-            // Draw the legs (simple straight lines for a seated pose)
-            ctx.beginPath();
-            ctx.moveTo(x - 10, deskY);
-            ctx.lineTo(x - 10, deskY + 20);
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.moveTo(x + 10, deskY);
-            ctx.lineTo(x + 10, deskY + 20);
-            ctx.stroke();
-
-            // Head nod animation
-            headNod = Math.sin(frame * 0.05) * 5;
-
-            ctx.save();
-            ctx.translate(x, y - 20); // Adjust y for body positioning
-            ctx.rotate(headNod * Math.PI / 180);
-
-            // Draw the body (simple shape)
-            ctx.beginPath();
-            ctx.rect(-15, -15, 30, 30);
-            ctx.fillStyle = '#0a0a0a';
-            ctx.fill();
-            ctx.stroke();
-            
-            // Draw the head (a circle)
-            const headY = -30;
-            ctx.beginPath();
-            ctx.arc(0, headY, 15, 0, Math.PI * 2);
-            ctx.stroke();
-
-            // Draw long hair
-            ctx.beginPath();
-            ctx.moveTo(0, headY - 15);
-            ctx.lineTo(-25, headY - 15);
-            ctx.lineTo(-30, headY + 10);
-            ctx.moveTo(0, headY - 15);
-            ctx.lineTo(25, headY - 15);
-            ctx.lineTo(30, headY + 10);
-            ctx.stroke();
-
-            // Draw circular glasses
-            ctx.beginPath();
-            ctx.arc(-8, headY, 8, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.arc(8, headY, 8, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(-16, headY);
-            ctx.lineTo(16, headY);
-            ctx.stroke();
-
-            ctx.restore();
-
-            // Draw arms (fixed position for a seated look)
-            ctx.beginPath();
-            ctx.moveTo(x - 15, y - 10);
-            ctx.lineTo(x - 30, y + 10);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(x + 15, y - 10);
-            ctx.lineTo(x + 30, y + 10);
-            ctx.stroke();
-        }
-
-        // The main animation loop
-        function animate() {
-            drawCharacter(canvas.width / 2, canvas.height * 0.5, frame);
-            frame++;
-            requestAnimationFrame(animate);
-        }
-
         // Modal functionality
         document.addEventListener('DOMContentLoaded', () => {
             const contactButton = document.getElementById('contactButton');
@@ -326,7 +258,7 @@
             
             // Show the modal when the button is clicked
             contactButton.addEventListener('click', (e) => {
-                e.preventDefault(); // Prevent the default link behavior
+                e.preventDefault();
                 contactModal.classList.remove('hidden');
             });
 
@@ -335,13 +267,10 @@
                 contactModal.classList.add('hidden');
             });
         });
-
-        window.onload = function() {
-            animate();
-        };
     </script>
 </body>
 </html>
+
 
 
 
