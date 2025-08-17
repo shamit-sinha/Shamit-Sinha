@@ -148,8 +148,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 591px;
-            min-height: 288px;
+            width: 750px;
+            min-height: 29px;
         }
 
         .content-box-text {
@@ -157,7 +157,7 @@
         }
 
         .content-box-right .content-box-text {
-            text-align: right;
+            text-align: left;
         }
 
         /* Updated main layout to push boxes to sides */
@@ -173,11 +173,12 @@
         .boxes-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end;
             width: 100%;
             padding: 0 2rem;
             flex-grow: 1;
             margin-top: 2rem;
+            margin-bottom: 1rem;
         }
 
         /* Push boxes to extreme sides on larger screens */
@@ -311,32 +312,71 @@
                     </p>
                     
                     <!-- Projects Section -->
-                    <div class="projects-grid space-y-3">
+                    <div class="projects-grid space-y-4">
                         <!-- Documentary -->
-                        <div class="project-item">
-                            <h3 class="text-xs font-bold mb-1 text-neon-yellow">DOCUMENTARY</h3>
-                            <p class="text-xs mb-2 leading-relaxed">Real stories, authentic voices</p>
-                            <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('documentary')">
-                                > View Work
-                            </button>
+                        <div class="project-category">
+                            <h3 class="text-sm font-bold mb-2 text-neon-yellow neon-glow">DOCUMENTARY</h3>
+                            <div class="project-items space-y-2 ml-4">
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('iitjee-experience')">
+                                        > IITJEE: An Experience
+                                    </button>
+                                </div>
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('hows-college')">
+                                        > How's College
+                                    </button>
+                                </div>
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('invited-iitk')">
+                                        > Invited To IIT K
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         
                         <!-- Short Film -->
-                        <div class="project-item">
-                            <h3 class="text-xs font-bold mb-1 text-neon-yellow">SHORT FILM</h3>
-                            <p class="text-xs mb-2 leading-relaxed">Cinematic storytelling</p>
-                            <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('shortfilm')">
-                                > View Work
-                            </button>
+                        <div class="project-category">
+                            <h3 class="text-sm font-bold mb-2 text-neon-yellow neon-glow">SHORT FILM</h3>
+                            <div class="project-items space-y-2 ml-4">
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('the-delivery')">
+                                        > The Delivery
+                                    </button>
+                                </div>
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('between-light-life')">
+                                        > Between Light and Life
+                                    </button>
+                                </div>
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('alffaaz')">
+                                        > Alffaaz
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         
-                        <!-- Client Work -->
-                        <div class="project-item">
-                            <h3 class="text-xs font-bold mb-1 text-neon-yellow">CLIENT</h3>
-                            <p class="text-xs mb-2 leading-relaxed">Professional commissions</p>
-                            <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('client')">
-                                > View Work
-                            </button>
+                        <!-- IIT J -->
+                        <div class="project-category">
+                            <h3 class="text-sm font-bold mb-2 text-neon-yellow neon-glow">IIT J</h3>
+                            <div class="project-items space-y-2 ml-4">
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel1')">
+                                        > Reel 1
+                                    </button>
+                                </div>
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel2')">
+                                        > Reel 2
+                                    </button>
+                                </div>
+                                <div class="project-item">
+                                    <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('reel3')">
+                                        > Reel 3
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
@@ -391,9 +431,20 @@
         function openVideo(category) {
             // Define your video URLs here
             const videoLinks = {
-                'documentary': 'https://youtube.com/watch?v=YOUR_DOCUMENTARY_VIDEO_ID',
-                'shortfilm': 'https://youtube.com/watch?v=YOUR_SHORTFILM_VIDEO_ID', 
-                'client': 'https://youtube.com/watch?v=YOUR_CLIENT_VIDEO_ID'
+                // Documentary videos
+                'iitjee-experience': 'https://youtube.com/watch?v=YOUR_IITJEE_EXPERIENCE_VIDEO_ID',
+                'hows-college': 'https://youtube.com/watch?v=YOUR_HOWS_COLLEGE_VIDEO_ID',
+                'invited-iitk': 'https://youtube.com/watch?v=YOUR_INVITED_IITK_VIDEO_ID',
+                
+                // Short film videos
+                'the-delivery': 'https://youtube.com/watch?v=YOUR_THE_DELIVERY_VIDEO_ID',
+                'between-light-life': 'https://youtube.com/watch?v=YOUR_BETWEEN_LIGHT_LIFE_VIDEO_ID',
+                'alffaaz': 'https://youtube.com/watch?v=YOUR_ALFFAAZ_VIDEO_ID',
+                
+                // IIT J videos
+                'reel1': 'https://youtube.com/watch?v=YOUR_REEL1_VIDEO_ID',
+                'reel2': 'https://youtube.com/watch?v=YOUR_REEL2_VIDEO_ID',
+                'reel3': 'https://youtube.com/watch?v=YOUR_REEL3_VIDEO_ID'
             };
             
             // Open the video in a new tab
