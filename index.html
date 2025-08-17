@@ -134,6 +134,30 @@
             box-shadow: 0 0 20px #ff00ff;
             padding: 2rem;
             text-align: center;
+            position: relative;
+        }
+
+        /* Close button styling */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #ff0000;
+            font-size: 28px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .close-btn:hover {
+            color: #ff4444;
         }
 
         /* Updated content box styling */
@@ -160,7 +184,7 @@
             text-align: left;
         }
 
-        /* Updated main layout to push boxes to sides */
+        /* Updated main layout to push boxes to sides and center them better */
         .main-layout-container {
             position: relative;
             width: 100%;
@@ -172,30 +196,27 @@
 
         .boxes-container {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            justify-content: center;
+            align-items: flex-start;
             width: 100%;
             padding: 0 2rem;
             flex-grow: 1;
-            margin-top: 2rem;
+            margin-top: 5rem;
             margin-bottom: 1rem;
+            gap: 4rem;
         }
 
-        /* Push boxes to extreme sides on larger screens */
+        /* Better centering for larger screens */
+        @media (min-width: 1200px) {
+            .boxes-container {
+                padding: 0 4rem;
+                gap: 6rem;
+            }
+        }
+
         @media (min-width: 768px) {
             .boxes-container {
-                padding: 0;
-                justify-content: space-between;
-                gap: 6rem;
-                margin: 0 -2rem;
-            }
-            
-            .content-box:first-child {
-                margin-left: -3rem;
-            }
-            
-            .content-box:last-child {
-                margin-right: -3rem;
+                gap: 5rem;
             }
         }
 
@@ -213,10 +234,10 @@
             }
         }
 
-        /* Adjusted header positioning */
+        /* Adjusted header positioning - moved down by additional 10px */
         .main-header {
             position: absolute;
-            top: -60px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
             width: 100%;
@@ -232,14 +253,15 @@
             text-decoration-thickness: 3px;
         }
 
-        /* Adjusted contact section and footer positioning */
+        /* Adjusted contact section and footer positioning - moved down by additional 10px */
         .bottom-section {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1rem;
+            padding-bottom: 2rem;
         }
         
         /* Project and social button styling */
@@ -270,14 +292,12 @@
     <!-- The error modal, hidden by default -->
     <div id="contactModal" class="error-modal hidden">
         <div class="error-box">
+            <button id="closeModal" class="close-btn">&times;</button>
             <h2 class="text-xl md:text-2xl font-bold text-red-500 mb-4">!! CONNECTION ALERT !!</h2>
-            <p class="mb-6">To make a successful connection, contact me at <br><span class="text-lavender neon-glow">theunfunnysinha@gmail.com</span></p>
+            <p class="mb-6">To make a successful connection, email me at <br><span class="text-lavender neon-glow">theunfunnysinha@gmail.com</span></p>
             <a href="mailto:theunfunnysinha@gmail.com" id="emailLink" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
                 > Connect
             </a>
-            <button id="closeModal" class="mt-4 text-xs text-gray-400 hover:text-white transition duration-200">
-                (Close Window)
-            </button>
         </div>
     </div>
 
@@ -288,7 +308,7 @@
             <h1 class="text-3xl md:text-4xl font-bold mb-2 neon-glow text-center underlined-title" style="font-size: 48px;">SHAMIT SINHA</h1>
         </header>
 
-        <!-- Container for the two boxes pushed to sides -->
+        <!-- Container for the two boxes centered with proper spacing -->
         <div class="boxes-container">
             <!-- Left Box: About.txt and profile picture -->
             <section class="content-box">
@@ -400,7 +420,7 @@
             </section>
         </div>
 
-        <!-- Bottom section with Contact and Footer together -->
+        <!-- Bottom section with Contact and Footer together - positioned lower -->
         <div class="bottom-section">
             <a href="#" id="contactButton" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
                 > Contact Me
@@ -427,6 +447,13 @@
             // Hide the modal when the close button is clicked
             closeModalButton.addEventListener('click', () => {
                 contactModal.classList.add('hidden');
+            });
+
+            // Hide modal when clicking outside the error box
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) {
+                    contactModal.classList.add('hidden');
+                }
             });
         });
 
