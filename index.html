@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-s1.0">
     <title>My Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -21,15 +21,27 @@
 
         body {
             font-family: 'Press Start 2P', monospace;
-            background-color: var(--color-dark-teal);
-            /* Create a dreamy, surreal background with a radial gradient */
-            background-image: radial-gradient(circle at center, rgba(0, 40, 55, 0.7) 0%, rgba(0, 25, 35, 0.9) 50%, var(--color-dark-teal) 100%);
             color: #d1d5db;
             animation: fadeIn 2s ease-in-out;
             /* Hide body overflow to prevent scrollbars */
             overflow: hidden;
+            position: relative; /* Required for the video to be positioned absolutely */
         }
         
+        /* Video background styling */
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: -1;
+            filter: brightness(25%) grayscale(50%) blur(2px); /* To make the video look subtle and not distract from the text */
+        }
+
         /* Glitch animation for text */
         @keyframes glitch {
             0% { transform: translate(0); text-shadow: var(--color-glow-yellow); }
@@ -138,9 +150,22 @@
             padding: 2rem;
             text-align: center;
         }
+
+        .about-section-container {
+            border: 2px solid #a879d7;
+            padding: 1rem;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- The background video element -->
+    <video autoplay loop muted playsinline id="bg-video">
+        <!-- The src attribute points to your video file on GitHub -->
+        <source src="video.mov" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <div id="contactModal" class="error-modal hidden">
         <div class="error-box">
@@ -161,17 +186,19 @@
         </header>
         
         <main class="space-y-6 text-white text-left">
-            <section class="flex-container">
-                <div class="profile-picture-container">
-                    <img src="profile.png" alt="Your Profile Picture" class="profile-picture">
-                </div>
-                <div>
-                    <h2 class="text-xl md:text-2xl font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
-                    <p class="mt-2 leading-relaxed">
-                        Hello! I'm a passionate creator, and this is my digital space. Here you'll find a collection of my
-                        projects, from video editing and graphic design to web development. I am always exploring
-                        new ideas and love to bring concepts to life.
-                    </p>
+            <section class="about-section-container">
+                <div class="flex-container">
+                    <div class="profile-picture-container">
+                        <img src="profile.png" alt="Your Profile Picture" class="profile-picture">
+                    </div>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
+                        <p class="mt-2 leading-relaxed">
+                            Hello! I'm a passionate creator, and this is my digital space. Here you'll find a collection of my
+                            projects, from video editing and graphic design to web development. I am always exploring
+                            new ideas and love to bring concepts to life.
+                        </p>
+                    </div>
                 </div>
             </section>
             
