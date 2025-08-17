@@ -232,10 +232,14 @@
             text-decoration-thickness: 3px;
         }
 
-        /* Adjusted contact section positioning */
-        .contact-section {
-            margin-top: 5rem;
-            margin-bottom: 2rem;
+        /* Adjusted contact section and footer positioning */
+        .bottom-section {
+            margin-top: 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
         }
         
         /* Project and social button styling */
@@ -389,16 +393,15 @@
             </section>
         </div>
 
-        <!-- The Contact Me button centered at the bottom -->
-        <section class="text-center contact-section">
+        <!-- Bottom section with Contact and Footer together -->
+        <div class="bottom-section">
             <a href="#" id="contactButton" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
                 > Contact Me
             </a>
-        </section>
-        
-        <footer class="mt-8 text-gray-500 text-xs text-center">
-            > C://USER/MY_WEBSITE
-        </footer>
+            <footer class="text-gray-500 text-xs">
+                > C://USER/MY_WEBSITE
+            </footer>
+        </div>
     </div>
     
     <script>
@@ -448,6 +451,4 @@
     </script>
 </body>
 </html>
-
-
 
