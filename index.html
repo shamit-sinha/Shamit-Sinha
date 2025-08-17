@@ -236,6 +236,22 @@
             margin-top: 5rem;
             margin-bottom: 2rem;
         }
+        
+        /* Project and social button styling */
+        .project-btn, .social-btn {
+            font-family: 'Press Start 2P', monospace;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 10px;
+        }
+        
+        .project-item {
+            padding: 0.5rem 0;
+        }
+        
+        .social-links a {
+            font-family: 'Press Start 2P', monospace;
+        }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen p-4">
@@ -290,11 +306,52 @@
             <section class="content-box content-box-right">
                 <div class="content-box-text">
                     <h2 class="text-lg md:text-xl font-semibold mb-2 neon-glow">/PROJECTS.EXE</h2>
-                    <p class="mt-2 leading-relaxed text-sm">
-                        <span class="text-lavender">Loading...</span>
-                        This space will showcase my projects, inspired by the aesthetics of a
-                        bygone digital age. From pixel art to 3D rendering.
+                    <p class="mt-2 leading-relaxed text-sm mb-4">
+                        I use DaVinci Resolve to edit videos with various editing effects, bringing stories to life through post-production magic.
                     </p>
+                    
+                    <!-- Projects Section -->
+                    <div class="projects-grid space-y-3">
+                        <!-- Documentary -->
+                        <div class="project-item">
+                            <h3 class="text-xs font-bold mb-1 text-neon-yellow">DOCUMENTARY</h3>
+                            <p class="text-xs mb-2 leading-relaxed">Real stories, authentic voices</p>
+                            <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('documentary')">
+                                > View Work
+                            </button>
+                        </div>
+                        
+                        <!-- Short Film -->
+                        <div class="project-item">
+                            <h3 class="text-xs font-bold mb-1 text-neon-yellow">SHORT FILM</h3>
+                            <p class="text-xs mb-2 leading-relaxed">Cinematic storytelling</p>
+                            <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('shortfilm')">
+                                > View Work
+                            </button>
+                        </div>
+                        
+                        <!-- Client Work -->
+                        <div class="project-item">
+                            <h3 class="text-xs font-bold mb-1 text-neon-yellow">CLIENT</h3>
+                            <p class="text-xs mb-2 leading-relaxed">Professional commissions</p>
+                            <button class="project-btn text-xs py-1 px-3 border border-lavender hover:bg-lavender hover:text-black transition-all duration-200" onclick="openVideo('client')">
+                                > View Work
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="social-links mt-4 pt-3 border-t border-gray-600">
+                        <p class="text-xs mb-2">Follow my journey:</p>
+                        <div class="flex space-x-3">
+                            <a href="https://instagram.com/your-handle" target="_blank" class="social-btn text-xs py-1 px-2 border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
+                                Instagram
+                            </a>
+                            <a href="https://youtube.com/your-channel" target="_blank" class="social-btn text-xs py-1 px-2 border border-neon-yellow hover:bg-neon-yellow hover:text-dark-teal transition-all duration-200">
+                                YouTube
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -329,6 +386,21 @@
                 contactModal.classList.add('hidden');
             });
         });
+
+        // Function to open video links
+        function openVideo(category) {
+            // Define your video URLs here
+            const videoLinks = {
+                'documentary': 'https://youtube.com/watch?v=YOUR_DOCUMENTARY_VIDEO_ID',
+                'shortfilm': 'https://youtube.com/watch?v=YOUR_SHORTFILM_VIDEO_ID', 
+                'client': 'https://youtube.com/watch?v=YOUR_CLIENT_VIDEO_ID'
+            };
+            
+            // Open the video in a new tab
+            if (videoLinks[category]) {
+                window.open(videoLinks[category], '_blank');
+            }
+        }
     </script>
 </body>
 </html>
