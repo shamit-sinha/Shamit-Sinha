@@ -136,37 +136,20 @@
             text-align: center;
         }
 
-        /* Two-column layout for the main content boxes */
-        .main-content-layout {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 5rem;
-        }
-
-        @media (min-width: 768px) {
-            .main-content-layout {
-                flex-direction: row;
-                justify-content: center;
-                gap: 10rem;
-                padding: 0 2rem;
-                align-items: stretch;
-            }
-        }
-
-        /* New styles for the two separate content boxes */
+        /* Updated content box styling */
         .content-box {
             background: rgba(0, 0, 0, 0.75);
             border: 2px solid var(--color-lavender);
             animation: border-pulse 2s infinite ease-in-out;
             padding: 2rem;
             border-radius: 8px;
-            flex: 1;
+            flex: 0 0 auto;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100%;
+            width: 100%;
+            max-width: 350px;
         }
 
         .content-box-text {
@@ -175,6 +158,65 @@
 
         .content-box-right .content-box-text {
             text-align: right;
+        }
+
+        /* Updated main layout to push boxes to sides */
+        .main-layout-container {
+            position: relative;
+            width: 100%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .boxes-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0 2rem;
+            flex-grow: 1;
+        }
+
+        /* Push boxes to extreme sides on larger screens */
+        @media (min-width: 768px) {
+            .boxes-container {
+                padding: 0 1rem;
+            }
+            
+            .content-box:first-child {
+                margin-right: auto;
+            }
+            
+            .content-box:last-child {
+                margin-left: auto;
+            }
+        }
+
+        /* Mobile responsive stacking */
+        @media (max-width: 767px) {
+            .boxes-container {
+                flex-direction: column;
+                gap: 3rem;
+                align-items: center;
+            }
+        }
+
+        /* Adjusted header positioning */
+        .main-header {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* Adjusted contact section positioning */
+        .contact-section {
+            margin-top: 3rem;
         }
     </style>
 </head>
@@ -200,13 +242,15 @@
         </div>
     </div>
 
-    <!-- The main layout container with the two content boxes -->
-    <div class="max-w-6xl w-full text-center p-4">
-        <header class="mb-8 mt-4">
+    <!-- The main layout container -->
+    <div class="max-w-7xl w-full main-layout-container">
+        <!-- Header positioned above the boxes -->
+        <header class="main-header">
             <h1 class="text-3xl md:text-4xl font-bold mb-2 neon-glow text-center" style="font-size: 48px;">SHAMIT SINHA</h1>
         </header>
 
-        <div class="flex flex-col md:flex-row justify-between items-stretch space-y-8 md:space-y-0 md:space-x-40">
+        <!-- Container for the two boxes pushed to sides -->
+        <div class="boxes-container">
             <!-- Left Box: About.txt and profile picture -->
             <section class="content-box">
                 <div class="flex flex-col items-center space-y-4">
@@ -225,7 +269,7 @@
             </section>
             
             <!-- Right Box: Projects.exe -->
-            <section class="content-box">
+            <section class="content-box content-box-right">
                 <div class="content-box-text">
                     <h2 class="text-lg md:text-xl font-semibold mb-2 neon-glow">/PROJECTS.EXE</h2>
                     <p class="mt-2 leading-relaxed text-sm">
@@ -237,8 +281,8 @@
             </section>
         </div>
 
-        <!-- The Contact Me button is now centered at the bottom of the page -->
-        <section class="text-center mt-8">
+        <!-- The Contact Me button centered at the bottom -->
+        <section class="text-center contact-section">
             <a href="#" id="contactButton" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
                 > Contact Me
             </a>
@@ -270,8 +314,6 @@
     </script>
 </body>
 </html>
-
-
 
 
 
