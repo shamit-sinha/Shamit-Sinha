@@ -150,7 +150,7 @@
             align-items: center;
             width: 100%;
             max-width: 455px;
-            min-height: 400px;
+            min-height: 450px;
         }
 
         .content-box-text {
@@ -183,15 +183,19 @@
         /* Push boxes to extreme sides on larger screens */
         @media (min-width: 768px) {
             .boxes-container {
-                padding: 0 1rem;
+                padding: 0 0.5rem;
+                justify-content: space-between;
+                gap: 4rem;
             }
             
             .content-box:first-child {
                 margin-right: auto;
+                margin-left: -1rem;
             }
             
             .content-box:last-child {
                 margin-left: auto;
+                margin-right: -1rem;
             }
         }
 
@@ -261,9 +265,9 @@
                     <div class="content-box-text">
                         <h2 class="text-lg md:text-xl font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
                         <p class="mt-2 leading-relaxed text-sm">
-                            Hello! I'm a passionate creator, and this is my digital space. Here you'll find a collection of my
-                            projects, from video editing and graphic design to web development. I am always exploring
-                            new ideas and love to bring concepts to life.
+                            Hey there! I'm a content creator and storyteller currently studying at RVCE. Over the past few years, I've been diving deep into video production—everything from coming up with ideas and writing scripts to getting behind the camera and bringing it all together in the editing room.
+                            <br><br>
+                            What started as a passion project has grown into something amazing—my YouTube channel now has over 25K subscribers who've become part of this incredible community. I love sharing stories that connect with people, and I've also had the chance to work on some exciting short films. Recently, I've been creating content for IITJ through Binge Labs, for their BSC degree in AI & DS.
                         </p>
                     </div>
                 </div>
@@ -315,5 +319,4 @@
     </script>
 </body>
 </html>
-
 
