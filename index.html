@@ -148,9 +148,8 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 100%;
-            max-width: 591px;
-            min-height: 320px;
+            width: 591px;
+            min-height: 288px;
         }
 
         .content-box-text {
@@ -183,19 +182,18 @@
         /* Push boxes to extreme sides on larger screens */
         @media (min-width: 768px) {
             .boxes-container {
-                padding: 0 0.5rem;
+                padding: 0;
                 justify-content: space-between;
-                gap: 4rem;
+                gap: 6rem;
+                margin: 0 -2rem;
             }
             
             .content-box:first-child {
-                margin-right: auto;
-                margin-left: -1rem;
+                margin-left: -3rem;
             }
             
             .content-box:last-child {
-                margin-left: auto;
-                margin-right: -1rem;
+                margin-right: -3rem;
             }
         }
 
@@ -205,6 +203,11 @@
                 flex-direction: column;
                 gap: 3rem;
                 align-items: center;
+            }
+            
+            .content-box {
+                width: 100%;
+                max-width: 400px;
             }
         }
 
@@ -318,4 +321,5 @@
         });
     </script>
 </body>
-</html>
+</html>ml>
+
