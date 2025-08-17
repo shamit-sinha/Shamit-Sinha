@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <!-- Use Tailwind CSS for base styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Import a pixelated font for the retro terminal look */
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        /* Define custom colors and shadows using CSS variables for a consistent theme */
+        :root {
+            --color-neon-yellow: #f4eecf;
+            --color-neon-magenta: #ff00ff;
+            --color-lavender: #a879d7;
+            --color-dark-teal: #002233;
+            --color-glow-yellow: 0 0 10px var(--color-neon-yellow), 0 0 20px var(--color-neon-yellow), 0 0 40px var(--color-neon-yellow);
+            --color-glow-magenta: 0 0 10px var(--color-neon-magenta), 0 0 20px var(--color-neon-magenta), 0 0 40px var(--color-neon-magenta);
+        }
+
+        body {
+            font-family: 'Press+Start+2P', monospace;
+            background-color: var(--color-dark-teal);
+            /* Create a dreamy, surreal background with a radial gradient */
+            background-image: radial-gradient(circle at center, rgba(0, 40, 55, 0.7) 0%, rgba(0, 25, 35, 0.9) 50%, var(--color-dark-teal) 100%);
+            color: #d1d5db;
+            animation: fadeIn 2s ease-in-out;
+            /* Hide body overflow to prevent scrollbars */
+            overflow: hidden;
+        }
+        
+        /* Glitch animation for text */
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: var(--color-glow-yellow); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); text-shadow: var(--color-glow-magenta); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); text-shadow: var(--color-glow-yellow); }
+        }
+
+        .glitch-text {
+            animation: glitch 1.5s infinite alternate;
+            color: var(--color-neon-yellow);
+        }
+
+        /* Neon glow effect for titles and buttons */
+        .neon-glow {
+            text-shadow: var(--color-glow-yellow);
+        }
+
+        /* Subtle pulsating effect for buttons */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulsing-button {
+            animation: pulse 2s infinite ease-in-out;
+            background-color: var(--color-neon-yellow);
+            color: var(--color-dark-teal);
+            box-shadow: 0 0 10px var(--color-neon-yellow), 0 0 20px var(--color-neon-yellow);
+            transition: all 0.3s ease-in-out;
+        }
+        .pulsing-button:hover {
+            box-shadow: 0 0 15px var(--color-neon-yellow), 0 0 25px var(--color-neon-yellow), 0 0 35px var(--color-neon-yellow);
+        }
+
+        /* Pulsing border for the CRT monitor */
+        @keyframes border-pulse {
+            0%, 100% { box-shadow: 0 0 10px var(--color-lavender), inset 0 0 10px var(--color-lavender); }
+            50% { box-shadow: 0 0 20px var(--color-lavender), inset 0 0 20px var(--color-lavender); }
+        }
+        
+        .crt-monitor {
+            background: rgba(0, 0, 0, 0.75); /* Semi-transparent background for the content card */
+            border: 2px solid var(--color-lavender);
+            animation: border-pulse 2s infinite ease-in-out;
+            /* Ensure the content container has a defined space for the canvas */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Flex container for the aligned sections */
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        /* Placeholder for the user's picture */
+        .profile-picture-container {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--color-neon-yellow);
+            box-shadow: 0 0 15px var(--color-neon-yellow);
+            margin-right: 2rem;
+            flex-shrink: 0;
+        }
+
+        .profile-picture {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(80%) sepia(20%) saturate(150%); /* Lo-fi aesthetic filter */
+        }
+
+        @media (min-width: 768px) {
+            .flex-container {
+                flex-direction: row;
+            }
+        }
+
+        /* Modal styling for the error box */
+        .error-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .error-box {
+            background-color: #1a1a1a;
+            border: 2px solid #ff00ff; /* Magenta border to make it pop */
+            box-shadow: 0 0 20px #ff00ff;
+            padding: 2rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- The error modal, hidden by default -->
+    <div id="contactModal" class="error-modal hidden">
+        <div class="error-box">
+            <h2 class="text-xl md:text-2xl font-bold text-red-500 mb-4">!! CONNECTION ALERT !!</h2>
+            <p class="mb-6">To make a successful connection, contact me at <br><span class="text-lavender neon-glow">theunfunnysinha@gmail.com</span></p>
+            <a href="mailto:theunfunnysinha@gmail.com" id="emailLink" class="pulsing-button inline-block font-bold py-3 px-8 rounded-full">
+                > Connect
+            </a>
+            <button id="closeModal" class="mt-4 text-xs text-gray-400 hover:text-white transition duration-200">
+                (Close Window)
+            </button>
+        </div>
+    </div>
+
+    <!-- Main content container (now contains the canvas) -->
+    <div class="crt-monitor max-w-2xl w-full rounded-lg p-8 md:p-12 text-center text-sm transform transition duration-500 hover:scale-105">
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 neon-glow text-center">MY PORTFOLIO</h1>
+        </header>
+        
+        <main class="space-y-6 text-white text-left">
+            <section class="flex-container">
+                <div class="profile-picture-container">
+                    <img src="https://googleusercontent.com/file_content/1" alt="Your Profile Picture" class="profile-picture">
+                </div>
+                <div>
+                    <h2 class="text-xl md:text-2xl font-semibold mb-2 neon-glow">/ABOUT.TXT</h2>
+                    <p class="mt-2 leading-relaxed">
+                        Hello! I'm a passionate creator, and this is my digital space. Here you'll find a collection of my
+                        projects, from video editing and graphic design to web development. I am always exploring
+                        new ideas and love to bring concepts to life.
+                    </p>
+                </div>
+            </section>
+            
+            <section>
+                <h2 class="text-xl md:text-2xl font-semibold mb-2 neon-glow">/PROJECTS.EXE</h2>
+                <p class="mt-2 leading-relaxed">
+                    <span class="text-lavender">Loading...</span>
+                    This space will showcase my projects, inspired by the aesthetics of a
+                    bygone digital age. From pixel art to 3D rendering.
+                </p>
+            </section>
+
+            <section class="text-center">
+                <a href="#" id="contactButton" class="pulsing-button mt-4 inline-block font-bold py-3 px-8 rounded-full">
+                    > Contact Me
+                </a>
+            </section>
+        </main>
+        
+        <!-- The canvas is now inside the main content container -->
+        <canvas id="cartoonCanvas" width="400" height="200" class="mt-8 max-w-full h-auto"></canvas>
+
+        <footer class="mt-8 text-gray-500 text-xs text-center">
+            > C://USER/MY_WEBSITE
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('cartoonCanvas');
+        const ctx = canvas.getContext('2d');
+        let frame = 0;
+        let headNod = 0;
+
+        function drawCharacter(x, y, frame) {
+            ctx.strokeStyle = '#d1d5db';
+            ctx.fillStyle = '#111';
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // A simple desk for the character to sit at
+            const deskY = y + 20;
+            ctx.beginPath();
+            ctx.moveTo(x - 60, deskY);
+            ctx.lineTo(x + 60, deskY);
+            ctx.stroke();
+            
+            // Draw the legs (simple straight lines for a seated pose)
+            ctx.beginPath();
+            ctx.moveTo(x - 10, deskY);
+            ctx.lineTo(x - 10, deskY + 20);
+            ctx.stroke();
+
+            ctx.beginPath();
+        ctx.moveTo(x + 10, deskY);
+            ctx.lineTo(x + 10, deskY + 20);
+            ctx.stroke();
+
+            // Head nod animation
+            headNod = Math.sin(frame * 0.05) * 5;
+
+            ctx.save();
+            ctx.translate(x, y - 20); // Adjust y for body positioning
+            ctx.rotate(headNod * Math.PI / 180);
+
+            // Draw the body (simple shape)
+            ctx.beginPath();
+            ctx.rect(-15, -15, 30, 30);
+            ctx.fillStyle = '#0a0a0a';
+            ctx.fill();
+            ctx.stroke();
+            
+            // Draw the head (a circle)
+            const headY = -30;
+            ctx.beginPath();
+            ctx.arc(0, headY, 15, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Draw long hair
+            ctx.beginPath();
+            ctx.moveTo(0, headY - 15);
+            ctx.lineTo(-25, headY - 15);
+            ctx.lineTo(-30, headY + 10);
+            ctx.moveTo(0, headY - 15);
+            ctx.lineTo(25, headY - 15);
+            ctx.lineTo(30, headY + 10);
+            ctx.stroke();
+
+            // Draw circular glasses
+            ctx.beginPath();
+            ctx.arc(-8, headY, 8, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.arc(8, headY, 8, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(-16, headY);
+            ctx.lineTo(16, headY);
+            ctx.stroke();
+
+            ctx.restore();
+
+            // Draw arms (fixed position for a seated look)
+            ctx.beginPath();
+            ctx.moveTo(x - 15, y - 10);
+            ctx.lineTo(x - 30, y + 10);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x + 15, y - 10);
+            ctx.lineTo(x + 30, y + 10);
+            ctx.stroke();
+        }
+
+        // The main animation loop
+        function animate() {
+            drawCharacter(canvas.width / 2, canvas.height * 0.5, frame);
+            frame++;
+            requestAnimationFrame(animate);
+        }
+
+        // Modal functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const contactButton = document.getElementById('contactButton');
+            const contactModal = document.getElementById('contactModal');
+            const closeModalButton = document.getElementById('closeModal');
+            
+            // Show the modal when the button is clicked
+            contactButton.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent the default link behavior
+                contactModal.classList.remove('hidden');
+            });
+
+            // Hide the modal when the close button is clicked
+            closeModalButton.addEventListener('click', () => {
+                contactModal.classList.add('hidden');
+            });
+        });
+
+        window.onload = function() {
+            animate();
+        };
+    </script>
+</body>
+</html>
